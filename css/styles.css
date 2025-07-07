@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;1,600&display=swap');
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 19px;
+	line-height: 1.6;
+	font-family: "Helvetica Neue", "Arial", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #484744;
+	font-family: "Bitter", serif;
+	margin: 0 0 1.6rem 0;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+	color: #cfc7bc;
+}
+
+h1 {
+	font-size: 44px;
+	border-left: #b85600 0.25rem solid;
+	padding-left: 1rem;
+}
+
+h1::before, h1::after {
+  display: block;
+  border-top: #b85600 0.25rem solid;
+  width: .8rem;
+  content: "";
+  margin-left: -1rem;
+}
+
+
+body.dark h1, body.dark h1::before, body.dark h1::after {
+	border-color: #ce670d;
+}
+
+h2::before {
+	content: "> ";
+	color: #b85600;
+}
+
+body.dark h2::before {
+	color: #ce670d;
+}
+
+body {
+	color: #484744;
+	background: #f0ebe6;
+	padding: 3rem 0.8rem;
+}
+body.dark {
+	color: #cfc7bc;
+	background: #202124;
+}
+
+a {
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	/* text-decoration: none; */
+	color: #0082a9;
+}
+body.dark a {
+	color: #4f9dad;
+}
+
+img, video {
+	max-width: 100%;
+	background-color: #484744;
+	margin: 0 0 1.6rem 0;
+}
+
+figure {
+	margin-block-start: 0;
+	margin-block-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+}
+
+footer {
+	font-size: 0.8em;
+	opacity: 0.5;
+}
+
+p {
+	margin: 0 0 1.6rem 0;
+}
+
+hr {
+	clear: both;
+	border: none;
+	margin: 0 0 1.6rem 0;
+}
+
+ul {
+	margin-left: 1.6em;
+}
+
+audio {
+  width: 100%;
+}
+
+main, section, header, footer, nav#main_navigation {
+	max-width: 36rem;
+	width: 100%;
+	margin: 0 auto 1.6rem auto;
+}
+
+main::after, section::after, header::after, footer::after, nav#main_navigation::after {
+  clear: both;
+}
+
+main.wide, section.wide, header.wide, footer.wide {
+	max-width: 100%;
+}
+
+#image_face {
+	float: right;
+	margin: 0 0 0 1.6rem;
+}
+
+#image_face img {
+	height: 12em;
+	display: block;
+}
+
+#main_navigation a {
+	margin: 0 1.6rem 1.6rem 0;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#miscellus_logo {
+	margin: 0;
+	background: none;
+	fill: #b85600;
+	display: inline-block;
+	max-width: 100%;
+	width: 5em;
+	height: 5em;
+}
+
+body.dark #miscellus_logo {
+	fill: #ce670d;
+}
+
+#theme_button_wrapper {
+	text-align: right;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+    supported by Chrome, Edge, Opera and Firefox */
+}
+
+#theme_button::after {
+	float: right;
+	font-size: 1em;
+	cursor: pointer;
+	border-radius: 50%;
+	width: 3em;
+	height: 3em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #0082a9;
+	border: 1px solid #0082a9;
+	content: "Light";
+}
+
+body.dark #theme_button::after {
+	color: #4f9dad;
+	border: 1px solid #4f9dad;
+	content: "Dark";
+}
+
+body.system #theme_button_wrapper::after {
+	content: "(Auto)";
+	line-height: 3em;
+	display: inline;
+	padding-right: 0.5em;
+	opacity: 0.5;
+	float: right;
+	clear: none;
+}
+
+.text_list > li {
+	margin: 2rem 0;
+}
+
+.note {
+	background: white;
+	padding: 1.6rem;
+	border-color: #d3d3d3;
+	border-width: 1px 1px 4px 1px;
+	border-style: solid;
+}
+
+body.dark .note {
+	background: #171513;
+	border-color: #403d3b;
+}
+
+.image_with_caption {
+	border-bottom: 1px solid #aaa;
+}
+
+.image_with_caption img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.image_with_caption figcaption {
+	font-size: 61.8%;
+	line-height: 1.618rem;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.project_video {
+	width: 100%;
+}
+
+.color_0 {color: black;}
+.color_1 {color: #f07000;}
+.color_2 {color: #808080;}
+
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.code {
+	font-family: monospace;
+	padding: 0em 0.3em;
+}
+
+.code-inline {
+	border: 1px solid;
+	border-radius: 4px;
+	white-space: nowrap;
+}
+
+.code-listing {
+	border: 1px dotted rgba(128, 128, 128, 0.5);
+	border-left: 4px solid rgba(128, 128, 128, 0.5);
+	margin: 0 0 1.6rem 0;
+}
+
+.code-listing > * {
+	background-color: rgba(0,0,0,0.01);
+	margin: auto;
+}
+
+.code-listing > :nth-child(odd) {
+	background-color: rgba(255,255,255,0.01);
+}
+
+/*hej //.spam*/.suckitspammers /*hej spam*/
+
+{
+	display: none;}
+
+.project-brief {
+	margin: 0 0 3.2rem 0;
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2)      and (min-width: 1300px),
+only screen and (   min--moz-device-pixel-ratio: 2)      and (min-width: 1300px),
+only screen and (   -min-moz-device-pixel-ratio: 2)      and (min-width: 1300px),
+only screen and (     -o-min-device-pixel-ratio: 2/1)    and (min-width: 1300px),
+only screen and (        min-device-pixel-ratio: 2)      and (min-width: 1300px),
+only screen and (                min-resolution: 192dpi) and (min-width: 1300px),
+only screen and (                min-resolution: 2dppx)  and (min-width: 1300px) {
+	html {
+	  font-size: 30px;
+	}
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 4)      and (min-width: 2000px),
+only screen and (   min--moz-device-pixel-ratio: 4)      and (min-width: 2000px),
+only screen and (   -min-moz-device-pixel-ratio: 4)      and (min-width: 2000px),
+only screen and (     -o-min-device-pixel-ratio: 4/1)    and (min-width: 2000px),
+only screen and (        min-device-pixel-ratio: 4)      and (min-width: 2000px),
+only screen and (                min-resolution: 300dpi) and (min-width: 2000px),
+only screen and (                min-resolution: 4dppx)  and (min-width: 2000px) {
+	html {
+		font-size: 43px;
+	}
+}
+
+@media screen and (max-width: 32em) {
+
+	body main, body section, body header, body footer {
+		margin: 1.5rem auto;
+	}
+
+	#image_face {
+		float: none;
+		margin: 0 0 1.6rem 0;
+		display: block;
+	}
+
+	#image_face img {
+		width: auto;
+		height: auto;
+		max-height: 12rem;
+		margin: 0 auto;
+	}
+}

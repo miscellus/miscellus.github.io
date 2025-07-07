@@ -1,0 +1,26 @@
+---
+title: Projects
+author: Jakob Kjær-Kammersgaard
+layout: base.njk
+---
+
+<header>
+    <h1>{{title}}</h1>
+</header>
+
+<main>
+<p>Here are a couple of projects I am working on when time permits:</p>
+
+{% for proj in collections.project %}
+    <section>
+        <header>
+            <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
+        </header>
+        <div>
+            <strong>{{proj.url}}</strong>
+            {{ proj.data.brief }}
+        </div>
+    </section>
+{% endfor %}
+
+</main>

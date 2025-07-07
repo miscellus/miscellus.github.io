@@ -1,0 +1,104 @@
+---
+layout: base.njk
+title: DM548 – Extra Stuff
+---
+
+<header>
+    <h1>{{title}}</h1>
+</header>
+
+<main class="note">
+    <h2>Lab cheat sheet</h2>
+    <h3>C</h3>
+
+    <strong>To compile with extra warnings, debug symbols:</strong>
+    <div class="code code-listing">
+        <p>gcc -Wall -Wextra -g yourProgram.c -o yourProgram</p>
+    </div>
+
+    <strong>To compile with extra warnings, debug symbols, <em>and sanitizers</em>:</strong>
+    <div class="code code-listing">
+        <p>gcc -Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined yourProgram.c -o yourProgram</p>
+    </div>
+
+    <strong>When using Valgrind, do not compile with sanitizers.  Invoke with:</strong>
+    <div class="code code-listing">
+        <p>valgrind --leak-check=full --track-origins=yes ./yourProgram with args</p>
+    </div>
+
+    <strong>Example Makefile:</strong>
+    <div class="code code-listing">
+        <p>compiler_flags=-Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined</p>
+        <p>&nbsp;</p>
+        <p>exercise_sources=$(wildcard lab_?/*.c)</p>
+        <p>exercise_executables=$(patsubst %.c,%,${exercise_sources})</p>
+        <p>&nbsp;</p>
+        <p>$(exercise_executables): %: %.c</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;gcc $(compiler_flags) $&lt; -o $@</p>
+        <p>&nbsp;</p>
+        <p>clean:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;rm $(exercise_executables)</p>
+    </div>
+    <hr>
+    <h3>Assembly</h3>
+    <strong>To assemble and link (Compile):</strong>
+    <div class="code code-listing">
+        <p>as --gstabs 1.s -o 1.o</p>
+        <p>as --gstabs utils.s -o utils.o</p>
+        <p>ld 1.o utils.o -o 1.out</p>
+    </div>
+    <strong>To run:</strong>
+    <div class="code code-listing">
+        <p>./1.out</p>
+    </div>
+
+    <strong>To debug with GDB:</strong>
+    <div class="code code-listing">
+        <p>gdb ./1.out</p>
+    </div>
+
+    <strong>Add, Commit, and push to git repository:</strong>
+    <div class="code code-listing">
+        <p>git add my_file.txt</p>
+        <p>git commit -m "Wrote some stuff in my_file.txt"</p>
+        <p>git push -u origin master</p>
+    </div>
+</main>
+
+<section>
+    <h2>Course resources</h2>
+    <p>Course Homepage:<br><a href="https://imada.sdu.dk/~jlandersen/teaching/dm548_19/" target="_blank">imada.sdu.dk/~jlandersen/teaching/dm548_19/</a></p>
+    <p>IMADA git server:<br><a href="https://git.imada.sdu.dk" target="_blank">git.imada.sdu.dk</a></p>
+    <p>Test server:<br><a href="https://dm548.imada.sdu.dk" target="_blank">dm548.imada.sdu.dk</a></p>
+    <p>Git guide:<br><a href="https://imada.sdu.dk/~jlandersen/_static/git.pdf" target="_blank">imada.sdu.dk/~jlandersen/_static/git.pdf</a></p>
+    <p>GDB intro:<br><a href="https://imada.sdu.dk/~jlandersen/_static/teaching/dm548_19/gdbNotes.pdf" target="_blank">imada.sdu.dk/~jlandersen/_static/teaching/dm548_19/gdbNotes.pdf</a></p>
+</section>
+
+<section>
+    <h2>Resources I find cool or helpful</h2>
+    <ul>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=HyznrdDSSGM&amp;list=PLowKtXNTBypGqImE405J2565dvjafglHU" target="_blank">8 bit CPU from scratch series</a></p>
+            <p>A video series about building a CPU from <strong>scratch!</strong> Only using basic logic chips; this series really gives you an intuition for what makes a CPU tick (literally).</p>
+            <p>The host of the youtube channel, Ben Eater, is a really good teacher (he used to work for Kahn Academy). I would recommend anything by that guy!</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=yOyaJXpAYZQ" target="_blank">Comparing C to machine language</a></p>
+            <p>Another video by Ben Eater.</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/channel/UCq7dxy_qYNEBcHqQVCbc20w" target="_blank">What's a Creel?</a></p>
+            <p>I would like be able to point you to some good assembly programming video tutorials; the only thing I can think of is this youtube channel. I remember learning a thing or two from his videos.</p>
+            <p>Be aware that he writes in Intel syntax where the operands are flipped compared to AT&amp;T syntax that we have learned.</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=S-ZDUYMoy3Y&amp;list=PLHMcG0zmCZcj7hKyHgQGGEZ41UWKaISKU" target="_blank">Young Sloth Learning's series on the stack</a></p>
+            <p>Thank you to Martin for recommending this series. (^:</p>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>If you have questions</h2>
+    <p>Send me (Jakob, your TA) an e-mail: <a href="mailto:jakkj16@student.sdu.dk">jakkj16@student.sdu.dk</a></p>
+</section>

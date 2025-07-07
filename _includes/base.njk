@@ -1,0 +1,13 @@
+<!doctype HTML>
+<html>
+<head>
+    <title>{{ title }} | miscellus</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+</head>
+<body>
+    {% include 'theme_toggle.njk' %}
+    {% include 'main_navigation.njk' %}
+    {{ content | safe }}
+    {% include 'footer_base.njk' %}
+</body>
+</html>
