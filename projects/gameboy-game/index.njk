@@ -1,0 +1,29 @@
+---
+title: "Game Boy Platform Game"
+extUrl: https://github.com/miscellus/gameboy-game
+
+brief: |
+    My yet-to-be-titled platform game for the original Nintendo Game Boy,
+    written in the Z80-esque assembly language native to the Game Boy CPU. A
+    nostalgic project that has compounded my admiration for the creators of the
+    games I used to play from the back seat of my parents' Škoda, the faint
+    reflective LCD only sporadically illuminated by the street lights gliding
+    by outside. I love that the limited instruction set of the Sharp LR35902
+    makes every little paragraph of assembly code a small puzzle to solve.
+
+dispElem: >
+    <video class="project_video" controls="" width="400"><source src="files/gameboy-game.mp4#t=0.001" type="video/mp4"></video>
+
+---
+
+<header>
+    <h1>{{title}}</h1>
+</header>
+<main>
+    <p><a href="{{extUrl}}" target="_blank">{{extUrl}}</a>.</p>
+
+    {{data.slug}}
+    {{dispElem | safe}}
+    
+    <p>{{brief}}</p>
+</main>
