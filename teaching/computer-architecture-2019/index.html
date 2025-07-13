@@ -1,0 +1,194 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="color-scheme" content="dark light">
+    <title>DM548 – Extra Stuff | miscellus</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    
+    <!-- mobile icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/files/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <div id="theme_button_wrapper"><span id="theme_button"></span></div>
+<script>
+"use strict";
+(function(){
+	let theme = parseInt(sessionStorage.getItem('theme')) || 0;
+	let next_theme;
+	let system_preference = false;
+	
+	function update_theme() {
+		const cl = document.body.classList;
+
+		const theme_is_dark = [system_preference, false, true][theme];
+
+		
+		if (theme_is_dark) {
+			cl.add('dark');
+		}
+		else {
+			cl.remove('dark');
+		}
+
+		if (theme == 0) {
+			cl.add('system');
+		}
+		else {
+			cl.remove('system');
+		}
+	}
+
+	if (window.matchMedia) {
+		next_theme = function (t) { return (t + 1) % 3; };
+		
+		const media_match_prefer_dark = window.matchMedia('(prefers-color-scheme: dark)');
+
+		function media_match_on_change(media) {
+			system_preference = media.matches;
+			update_theme();
+		}
+
+		media_match_on_change(media_match_prefer_dark);
+		if (media_match_prefer_dark.addListener) {
+			media_match_prefer_dark.addListener(media_match_on_change);
+		}
+		else {
+			media_match_prefer_dark.addEventListener("change", media_match_on_change);	
+		}
+	}
+	else {
+		next_theme = function(t) { return 1 + ((t + 1) & 1); };
+		theme = 1;
+		update_theme();
+	}
+
+	document.getElementById("theme_button").addEventListener("click", function(e) {
+		theme = next_theme(theme);
+		sessionStorage.setItem('theme', theme);
+		update_theme();
+	});
+})();
+</script>
+
+    <nav id="main_navigation">
+	<a id="miscellus_logo" href="/">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 58.54"><path transform="translate(-73.08 -47.94)" d="M93.79 75.12h22.58v3.53H93.79 M111.25 57.15q2.53 0 3.81 1.31 1.3 1.28 1.3 4.14v9.7h-4.05v-8.7q0-3.2-2.23-3.2-1.61 0-2.3 1.14-.67 1.14-.67 3.3v7.46h-4.06v-8.7q0-3.2-2.23-3.2-1.7 0-2.35 1.28-.62 1.25-.62 3.62v7h-4.06V57.43h3.1l.55 1.9h.22q.68-1.14 1.85-1.66 1.2-.52 2.48-.52 1.63 0 2.75.55 1.14.52 1.77 1.63h.35q.68-1.14 1.88-1.66 1.23-.52 2.5-.52 M82.12 98.49q1.32 0 1.98.67.68.67.68 2.15v5.02h-2.1v-4.5q0-1.66-1.16-1.66-.84 0-1.19.59-.35.6-.35 1.7v3.87h-2.1v-4.5q0-1.66-1.16-1.66-.88 0-1.22.66-.32.65-.32 1.88v3.62h-2.1v-7.7h1.6l.29.99h.11q.35-.6.96-.86.62-.27 1.29-.27.84 0 1.42.28.6.27.92.85h.18q.35-.6.98-.86.63-.27 1.3-.27M88 95.6q.47 0 .8.23.34.22.34.8 0 .59-.34.81-.33.23-.8.23-.48 0-.82-.23-.32-.22-.32-.8 0-.6.32-.8.34-.23.82-.23m1.04 3.03v7.7h-2.1v-7.7M96.62 104.05q0 1.17-.84 1.8-.81.62-2.45.62-.8 0-1.38-.1-.58-.1-1.16-.35v-1.73q.62.28 1.34.46.72.19 1.27.19.6 0 .87-.19.27-.18.27-.48 0-.2-.11-.35-.1-.16-.45-.35-.35-.2-1.1-.51-.74-.31-1.2-.6-.45-.32-.68-.74-.22-.44-.22-1.09 0-1.07.83-1.6.83-.54 2.21-.54.72 0 1.37.14.65.14 1.34.46l-.63 1.51q-.57-.24-1.07-.4-.51-.16-1.03-.16-.94 0-.94.5 0 .2.12.35.12.14.46.3.36.18 1.03.46.67.27 1.15.56.48.28.73.72.27.44.27 1.12M101.37 106.47q-1.72 0-2.66-.94-.93-.95-.93-3 0-1.42.48-2.3.48-.9 1.32-1.32.86-.42 1.98-.42.79 0 1.37.15.59.16 1.03.37l-.62 1.62q-.5-.2-.94-.32-.42-.13-.84-.13-1.64 0-1.64 2.33 0 1.16.42 1.7.44.56 1.22.56.66 0 1.17-.17.5-.19.99-.5v1.8q-.48.3-1.02.43-.52.14-1.33.14M108.67 98.49q1.59 0 2.52.91.93.9.93 2.59V103h-4.96q.02.9.52 1.4.5.5 1.4.5.73 0 1.34-.13.62-.16 1.27-.47v1.62q-.58.29-1.2.41-.63.14-1.51.14-1.16 0-2.05-.42-.89-.44-1.4-1.3-.5-.87-.5-2.21 0-1.34.45-2.25.46-.9 1.28-1.35.82-.45 1.9-.45m0 1.5q-.61 0-1 .39-.4.4-.47 1.23h2.95q-.02-.7-.38-1.16-.36-.47-1.1-.47M115.94 106.33h-2.1V95.61h2.1M120.24 106.33h-2.1V95.61h2.1M129.51 98.63v7.7h-1.6l-.29-.98h-.11q-.37.59-1.02.86-.63.26-1.35.26-1.25 0-2-.66-.74-.68-.74-2.16v-5.02h2.1v4.5q0 .83.3 1.26.3.4.94.4.96 0 1.32-.64.35-.67.35-1.9v-3.62M137.08 104.05q0 1.17-.83 1.8-.82.62-2.46.62-.8 0-1.38-.1-.58-.1-1.16-.35v-1.73q.62.28 1.34.46.72.19 1.27.19.6 0 .88-.19.26-.18.26-.48 0-.2-.11-.35-.1-.16-.45-.35-.35-.2-1.1-.51-.74-.31-1.2-.6-.45-.32-.68-.74-.22-.44-.22-1.09 0-1.07.83-1.6.83-.54 2.21-.54.72 0 1.37.14.65.14 1.34.46l-.63 1.51q-.57-.24-1.07-.4-.51-.16-1.03-.16-.94 0-.94.5 0 .2.12.35.12.14.46.3.36.18 1.03.46.67.27 1.15.56.48.28.73.72.27.44.27 1.12 M 105.078,47.938 c -11.015,0 -19.965,8.948 -19.965,19.963 0,11.015 8.95,19.965 19.965,19.965 11.015,0 19.963,-8.95 19.963,-19.965 0,-11.015 -8.948,-19.963 -19.963,-19.963 m 0,1.764 c 10.062,0 18.199,8.137 18.199,18.199 0,10.062 -8.137,18.201 -18.199,18.201 -10.062,0 -18.199,-8.139 -18.199,-18.201 0,-10.062 8.137,-18.199 18.199,-18.199z"></path></svg>
+		</a>
+	<a href="/projects">Projects</a>
+	<a href="/teaching">Teaching</a>
+</nav>
+
+    
+<header>
+    <h1>DM548 – Extra Stuff</h1>
+</header>
+
+<main class="note">
+    <h2>Lab cheat sheet</h2>
+    <h3>C</h3>
+
+    <strong>To compile with extra warnings, debug symbols:</strong>
+    <div class="code code-listing">
+        <p>gcc -Wall -Wextra -g yourProgram.c -o yourProgram</p>
+    </div>
+
+    <strong>To compile with extra warnings, debug symbols, <em>and sanitizers</em>:</strong>
+    <div class="code code-listing">
+        <p>gcc -Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined yourProgram.c -o yourProgram</p>
+    </div>
+
+    <strong>When using Valgrind, do not compile with sanitizers.  Invoke with:</strong>
+    <div class="code code-listing">
+        <p>valgrind --leak-check=full --track-origins=yes ./yourProgram with args</p>
+    </div>
+
+    <strong>Example Makefile:</strong>
+    <div class="code code-listing">
+        <p>compiler_flags=-Wall -Wextra -g -fsanitize=address -fsanitize=leak -fsanitize=undefined</p>
+        <p>&nbsp;</p>
+        <p>exercise_sources=$(wildcard lab_?/*.c)</p>
+        <p>exercise_executables=$(patsubst %.c,%,${exercise_sources})</p>
+        <p>&nbsp;</p>
+        <p>$(exercise_executables): %: %.c</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;gcc $(compiler_flags) $&lt; -o $@</p>
+        <p>&nbsp;</p>
+        <p>clean:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;rm $(exercise_executables)</p>
+    </div>
+    <hr>
+    <h3>Assembly</h3>
+    <strong>To assemble and link (Compile):</strong>
+    <div class="code code-listing">
+        <p>as --gstabs 1.s -o 1.o</p>
+        <p>as --gstabs utils.s -o utils.o</p>
+        <p>ld 1.o utils.o -o 1.out</p>
+    </div>
+    <strong>To run:</strong>
+    <div class="code code-listing">
+        <p>./1.out</p>
+    </div>
+
+    <strong>To debug with GDB:</strong>
+    <div class="code code-listing">
+        <p>gdb ./1.out</p>
+    </div>
+
+    <strong>Add, Commit, and push to git repository:</strong>
+    <div class="code code-listing">
+        <p>git add my_file.txt</p>
+        <p>git commit -m "Wrote some stuff in my_file.txt"</p>
+        <p>git push -u origin master</p>
+    </div>
+</main>
+
+<section>
+    <h2>Course resources</h2>
+    <p>Course Homepage:<br><a href="https://imada.sdu.dk/~jlandersen/teaching/dm548_19/" target="_blank">imada.sdu.dk/~jlandersen/teaching/dm548_19/</a></p>
+    <p>IMADA git server:<br><a href="https://git.imada.sdu.dk" target="_blank">git.imada.sdu.dk</a></p>
+    <p>Test server:<br><a href="https://dm548.imada.sdu.dk" target="_blank">dm548.imada.sdu.dk</a></p>
+    <p>Git guide:<br><a href="https://imada.sdu.dk/~jlandersen/_static/git.pdf" target="_blank">imada.sdu.dk/~jlandersen/_static/git.pdf</a></p>
+    <p>GDB intro:<br><a href="https://imada.sdu.dk/~jlandersen/_static/teaching/dm548_19/gdbNotes.pdf" target="_blank">imada.sdu.dk/~jlandersen/_static/teaching/dm548_19/gdbNotes.pdf</a></p>
+</section>
+
+<section>
+    <h2>Resources I find cool or helpful</h2>
+    <ul>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=HyznrdDSSGM&amp;list=PLowKtXNTBypGqImE405J2565dvjafglHU" target="_blank">8 bit CPU from scratch series</a></p>
+            <p>A video series about building a CPU from <strong>scratch!</strong> Only using basic logic chips; this series really gives you an intuition for what makes a CPU tick (literally).</p>
+            <p>The host of the youtube channel, Ben Eater, is a really good teacher (he used to work for Kahn Academy). I would recommend anything by that guy!</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=yOyaJXpAYZQ" target="_blank">Comparing C to machine language</a></p>
+            <p>Another video by Ben Eater.</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/channel/UCq7dxy_qYNEBcHqQVCbc20w" target="_blank">What's a Creel?</a></p>
+            <p>I would like be able to point you to some good assembly programming video tutorials; the only thing I can think of is this youtube channel. I remember learning a thing or two from his videos.</p>
+            <p>Be aware that he writes in Intel syntax where the operands are flipped compared to AT&amp;T syntax that we have learned.</p>
+        </li>
+        <li>
+            <p><a href="https://www.youtube.com/watch?v=S-ZDUYMoy3Y&amp;list=PLHMcG0zmCZcj7hKyHgQGGEZ41UWKaISKU" target="_blank">Young Sloth Learning's series on the stack</a></p>
+            <p>Thank you to Martin for recommending this series. (^:</p>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>If you have questions</h2>
+    <p>Send me (Jakob, your TA) an e-mail: <a href="mailto:jakkj16@student.sdu.dk">jakkj16@student.sdu.dk</a></p>
+</section>
+
+    <footer>
+    <p>Copyright © 2025, Jakob Kjær-Kammersgaard</p>
+</footer>
+
+</body>
+</html>
