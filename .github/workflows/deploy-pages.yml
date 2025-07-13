@@ -28,9 +28,20 @@ jobs:
       - run: npx @11ty/eleventy
 
       # deploy the content of _site to the branch gh-pages (default setting)
-      - name: deploy
+      - name: deploy GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           # this line is needed for the action to be able to push something to your repository
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+
+      - name: Deploy miscellus.com
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.MISCELLUS_HOST }}
+          username: ${{ secrets.MISCELLUS_USERNAME }}
+          key: ${{ secrets.MISCELLUS_KEY }}
+          port: ${{ secrets.MISCELLUS_PORT }}
+          passphrase: ${{ secrets.MISCELLUS_PASSPHRASE }}
+          script: |
+            ${{ secrets.MISCELLUS_DEPLOY_SCRIPT }}
