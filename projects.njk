@@ -10,7 +10,7 @@ layout: base.njk
 <main>
 <p>Here are a couple of projects I am working on when time permits:</p>
 
-{% for proj in collections.project %}
+{% for proj in collections.projects %}
     <section class="project-brief">
         <header>
             <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
@@ -23,4 +23,5 @@ layout: base.njk
     </section>
 {% endfor %}
 
+{% include 'getInTouch.njk' %}
 </main>
