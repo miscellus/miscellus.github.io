@@ -44,6 +44,5 @@ jobs:
           remote_host: ${{ secrets.MISCELLUS_HOST }}
           remote_port: ${{ secrets.MISCELLUS_PORT }}
           remote_user: ${{ secrets.MISCELLUS_USERNAME }}
-          remote_password: ${{ secrets.MISCELLUS_PASSWORD }}
           remote_key: ${{ secrets.MISCELLUS_KEY }}
           remote_key_pass: ${{ secrets.MISCELLUS_PASSPHRASE }}
