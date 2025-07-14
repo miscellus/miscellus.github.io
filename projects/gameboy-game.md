@@ -16,14 +16,16 @@ dispElem: >
 
 ---
 
-<header>
-    <h1>{{title}}</h1>
-</header>
-<main>
-    <p><a href="{{extUrl}}" target="_blank">{{extUrl}}</a>.</p>
+[{{extUrl}}]({{extUrl}}).
 
-    {{data.slug}}
-    {{dispElem | safe}}
-    
-    <p>{{brief}}</p>
-</main>
+<!-- -->{{dispElem}}
+
+<p><strong>{{brief}}</strong></p>
+
+## Handling Collisions
+
+In the video above, you see me jumping around a simple platform level. I want to talk a bit about how I prevent the little guy from falling through the ground or walking through walls.
+
+
+
+One clue is that&mdash;*like most game boy games*&mdash;the level is made from square tiles. Knowing that, one simple solution would be to 
