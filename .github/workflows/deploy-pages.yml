@@ -36,12 +36,13 @@ jobs:
           publish_dir: ./_site
 
       - name: Deploy miscellus.com
-        uses: appleboy/ssh-action@v1
+        uses: burnett01/rsync0-deployments@5.2
         with:
-          host: ${{ secrets.MISCELLUS_HOST }}
-          username: ${{ secrets.MISCELLUS_USERNAME }}
-          key: ${{ secrets.MISCELLUS_KEY }}
-          port: ${{ secrets.MISCELLUS_PORT }}
-          passphrase: ${{ secrets.MISCELLUS_PASSPHRASE }}
-          script: |
-            ${{ secrets.MISCELLUS_DEPLOY_SCRIPT }}
+          path: _site/
+          remote_path: ${{ secrets.MISCELLUS_REMOTE_PATH }}
+          remote_host: ${{ secrets.MISCELLUS_HOST }}
+          remote_port: ${{ secrets.MISCELLUS_PORT }}
+          remote_user: ${{ secrets.MISCELLUS_USERNAME }}
+          remote_password: ${{ secrets.MISCELLUS_PASSWORD }}
+          remote_key: ${{ secrets.MISCELLUS_KEY }}
+          remote_key_pass: ${{ secrets.MISCELLUS_PASSPHRASE }}
