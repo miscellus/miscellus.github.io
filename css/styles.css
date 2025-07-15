@@ -125,6 +125,25 @@ main.wide, section.wide, header.wide, footer.wide {
 	max-width: 100%;
 }
 
+.btn {
+    font-weight: bold;
+}
+
+.btn::after {
+    content: "";
+    margin-left: .25em;
+    border: solid #b85600;
+    border-width: 0 .25rem .25rem 0;
+    display: inline-block;
+    padding: .25rem;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+body.dark .btn::after {
+    border-color: #ce670d;
+}
+
 #image_face {
 	float: right;
 	margin: 0 0 0 1.6rem;
@@ -214,6 +233,7 @@ body.system #theme_button_wrapper::after {
 	border-color: #d3d3d3;
 	border-width: 1px 1px 4px 1px;
 	border-style: solid;
+    margin-bottom: 1.6rem;
 }
 
 body.dark .note {
@@ -282,9 +302,13 @@ body.dark .note {
 {
 	display: none;}
 
-.project-brief {
+/* {
 	margin: 0 0 3.2rem 0;
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
 }
+*/
 
 @media
 only screen and (-webkit-min-device-pixel-ratio: 2)      and (min-width: 1300px),

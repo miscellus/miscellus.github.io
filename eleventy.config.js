@@ -6,6 +6,10 @@ export default async function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("css");
     eleventyConfig.addPassthroughCopy("img");
     eleventyConfig.addPassthroughCopy("**/files");
-    eleventyConfig.addWatchTarget('_includes');
-    eleventyConfig.addWatchTarget('_data');
+    eleventyConfig.addWatchTarget("_includes");
+    eleventyConfig.addWatchTarget("_data");
+};
+
+export const config = {
+  markdownTemplateEngine: "njk",
 };

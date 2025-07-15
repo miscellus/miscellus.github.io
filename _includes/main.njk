@@ -3,7 +3,10 @@ layout: base.njk
 ---
 
 <main>
-    <h1>{{title}}</h1>
+    <header>
+        <h1>{{title}}</h1>
+        <date><small>Updated: {{page.date.toLocaleDateString()}}</small></date>
+    </header>
 
     {{ content | safe }}
 </main>
