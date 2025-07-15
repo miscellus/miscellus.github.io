@@ -7,13 +7,13 @@ layout: main.njk
 
 {% for proj in collections.project %}
     <article class="note">
-        <h2>{{ proj.data.title }}</h2>
+        <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
         <div>
             <p><a href="{{proj.data.extUrl}}" target="_blank">{{proj.data.extUrl}}</a></p>
             {{proj.data.dispElem | safe}}
             <p>{{ proj.data.brief }}</p>
         </div>
-        <a class="btn" href="{{proj.url}}">Read more</a>
+        <a class="more-link" href="{{proj.url}}">Read more</a>
     </article>
 {% endfor %}
 

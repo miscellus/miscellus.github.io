@@ -125,11 +125,11 @@ main.wide, section.wide, header.wide, footer.wide {
 	max-width: 100%;
 }
 
-.btn {
+.more-link {
     font-weight: bold;
 }
 
-.btn::after {
+.more-link::after {
     content: "";
     margin-left: .25em;
     border: solid #b85600;
@@ -140,7 +140,7 @@ main.wide, section.wide, header.wide, footer.wide {
     -webkit-transform: rotate(-45deg);
 }
 
-body.dark .btn::after {
+body.dark .more-link::after {
     border-color: #ce670d;
 }
 
