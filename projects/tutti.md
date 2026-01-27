@@ -20,14 +20,4 @@ dispElem: >
 
 ---
 
-<header>
-    <h1>{{title}}</h1>
-</header>
-<main>
-    <p><a href="{{extUrl}}" target="_blank">{{extUrl}}</a>.</p>
-
-    {{dispElem | safe}}
-
-    <p>{{brief}}</p>
-    <p>Oh, and it drives my wife nuts when I work on it without headphones.</p>
-</main>
+Oh, and it drives my wife nuts when I work on it without headphones.

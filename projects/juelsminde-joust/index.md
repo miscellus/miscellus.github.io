@@ -1,6 +1,10 @@
 ---
 title: "Juelsminde Joust"
 extUrl: https://github.com/miscellus/juelsminde-joust
+tags:
+    - project
+    - game
+    - raylib
 
 brief: |
     This is a simple local multiplayer game where players shoot projectiles by bumping into walls and other players. I created the game over a few days in a summer house in Juelsminde.
@@ -10,16 +14,6 @@ dispElem: >
 
 ---
 
-<header>
-    <h1>{{title}}</h1>
-</header>
-<main>
-    <p><a href="{{extUrl}}" target="_blank">{{extUrl}}</a>.</p>
+Here I'm playing with <a href="https://guld-berg.dk">Jørn</a> and <a href="https://zelaven.com">Patrick</a> at the office, and getting my butt kicked. Had it at least been me filming, I would have had an excuse, but it was Jørn holding the camera while playing.
 
-    {{dispElem | safe}}
-
-    <p>{{brief}}</p>
-
-    <p>Here I'm playing with <a href="https://guld-berg.dk">Jørn</a> and <a href="https://zelaven.com">Patrick</a> at the office, and getting my butt kicked. Had it at least been me filming, I would have had an excuse, but it was Jørn holding the camera while playing.</p>
-
-</main>
+<a href="files/juelsminde_joust.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in the browser</a>

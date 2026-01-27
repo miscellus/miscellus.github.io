@@ -1,27 +1,20 @@
 ---
 title: Projects
-layout: base.njk
+layout: main.njk
 ---
 
-<header>
-    <h1>{{title}}</h1>
-</header>
-
-<main>
 <p>Here are a couple of projects I am working on when time permits:</p>
 
-{% for proj in collections.projects %}
-    <article class="project-brief">
-        <header>
-            <h2>{{ proj.data.title }} <a href="{{proj.url}}">[read more]</a></h2>
-        </header>
+{% for proj in collections.project %}
+    <article class="note">
+        <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
         <div>
             <p><a href="{{proj.data.extUrl}}" target="_blank">{{proj.data.extUrl}}</a></p>
             {{proj.data.dispElem | safe}}
             <p>{{ proj.data.brief }}</p>
         </div>
+        <a class="more-link" href="{{proj.url}}">Read more</a>
     </article>
 {% endfor %}
 
 {% include 'getInTouch.njk' %}
-</main>

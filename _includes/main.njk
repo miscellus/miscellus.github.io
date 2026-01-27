@@ -1,0 +1,12 @@
+---
+layout: base.njk
+---
+
+<main>
+    <header>
+        <h1>{{title}}</h1>
+        <date><small>Updated: {{page.date.toLocaleDateString()}}</small></date>
+    </header>
+
+    {{ content | safe }}
+</main>
