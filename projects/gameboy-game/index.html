@@ -6,7 +6,8 @@
     <meta name="color-scheme" content="dark light">
     <title>Game Boy Platform Game | miscellus</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
-    
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />   
+
     <!-- mobile icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
@@ -86,28 +87,38 @@
 </nav>
 
     
-<header>
-    <h1>Game Boy Platform Game</h1>
-</header>
 <main>
-    <p><a href="https://github.com/miscellus/gameboy-game" target="_blank">https://github.com/miscellus/gameboy-game</a>.</p>
+    <header>
+        <h1>Game Boy Platform Game</h1>
+        <date><small>Updated: 1/27/2026</small></date>
+    </header>
 
     
-    <video class="project_video" controls="" width="400"><source src="/files/projects/gameboy-game.mp4#t=0.001" type="video/mp4"></video>
+<p><a href="https://github.com/miscellus/gameboy-game" target="_blank">https://github.com/miscellus/gameboy-game</a>.</p>
 
-    
-    <p>My yet-to-be-titled platform game for the original Nintendo Game Boy,
-written in the Z80-esque assembly language native to the Game Boy CPU. A
-nostalgic project that has compounded my admiration for the creators of the
-games I used to play from the back seat of my parents&#39; Škoda, the faint
-reflective LCD only sporadically illuminated by the street lights gliding
-by outside. I love that the limited instruction set of the Sharp LR35902
-makes every little paragraph of assembly code a small puzzle to solve.
+<video class="project_video" controls="" width="400"><source src="/files/projects/gameboy-game.mp4#t=0.001" type="video/mp4"></video>
+
+
+<p>My unfinished platform game for the original Nintendo Game Boy written in
+assembly language. A nostalgic project that has really made me
+admire the creators of the games I used to play as a child. I love that the
+limited instruction set of the Game Boy makes every little paragraph of
+code a small puzzle to solve.
 </p>
+
+<h2>Making the Walls Solid</h2>
+<p>In the video above, you see me jumping around a simple platform level. I want
+to talk a bit about how I prevent the little guy from falling through the
+ground or walking through walls.</p>
+<p>When the player moves, it does so in descrete steps, once every frame of animation. Thus, every frame, the player's velocity is added to its current position to calculate its new position. But if the new position is inside a wall, we need to find a way to move the player out of the wall. But first, we need a way to tell if the player is inside of a wall.</p>
+<p>In short, I divide the player's X and Y coordinate by the level tile size, 8, to lookup into a bitmap where each bit tells if the corresponding tile is solid or not.</p>
+<p><strong>TODO</strong></p>
+
+
 </main>
 
     <footer>
-    <p>Copyright © 2025, Jakob Kjær-Kammersgaard</p>
+    <p>Copyright © 2026, Jakob Kjær-Kammersgaard</p>
 </footer>
 
 </body>

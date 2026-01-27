@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta name="color-scheme" content="dark light">
-    <title>Jakob Kjær-Kammersgaard | miscellus</title>
+    <title> | miscellus</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />   
 
@@ -87,28 +87,88 @@
 </nav>
 
     
-<header>
-    <h1>Jakob Kjær-Kammersgaard</h1>
-</header>
 <main>
-<p>That's my name up there <strong>↑</strong>, and this is what I look like:</p>
-<figure id="image_face">
-    <img alt="Jakob Kjær-Kammersgaard" src="img/jkk_front_square.jpg">
-</figure>
+    <header>
+        <h1></h1>
+        <date><small>Updated: 1/27/2026</small></date>
+    </header>
 
-<p>I have a Master's degree in Computer Science from <a href="//www.sdu.dk/en">University of Southern Denmark</a> in Odense.
-<br>Things I enjoy: programming, dabbling in electronics, sharing knowledge, being in good company, and working on solving non-trivial problems (<a href="-_-">occasionally trivial non-problems</a>).</p>
+    
+<p><a href="" target="_blank"></a>.</p>
 
-<p>Together with two friends, <a href="https://www.guld-berg.dk" target="_blank">Jørn Guldberg</a> and <a href="https://www.zelaven.com" target="_blank">Patrick Jakobsen</a>, I co-founded a company, <a href="https://www.quasios.com" target="_blank">QuasiOS ApS</a>. We were doing operating systems research and developing a brand new OS for the robotics and automation industry.</p>
 
-<p>Unfortunately, our startup didn't make it. But luckily, I now get to work on solving non-trivial problems as a Software Developer on the Flight Routing Engine Team at <a href="https://foreflight.com/" target="_blank" alt="ForeFlight website">ForeFlight</a>.</p>
 
-<section>
-    <h2>Get in touch</h2>
-    <p>Via e-mail: ja<span class="suckitspammers">hej spam</span>kob<span class="suckitspammers">hej spam</span>@mis<span class="suckitspammers">hej spam</span>cellus.co<span class="suckitspammers">hej spam</span>m<br>
-    or on <a href="https://www.linkedin.com/in/jakob-kj%C3%A6r-kammersgaard-61357b167/">LinkedIn</a>.<br>
-    Sometimes I put my work on <a href="https://github.com/miscellus" target="_blank">github.com/miscellus</a>, although not exclusively.</p>
-</section>
+<p></p>
+
+<!DOCTYPE html>
+<html style="width:100%; height:100%;">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Juelsminde Joust | miscellus.com</title>
+</head>
+<body style="width:100%; height:100%;">
+    <input id="fullscreenButton" type=button value=fullscreen>
+    <div id=statusElement></div>
+    <div><progress hidden id=progressElement max=100 value=0></progress></div>
+    <canvas style="width:100%; height:100%;" class="emscripten" id="canvasElement" oncontextmenu="event.preventDefault()"></canvas>
+    <script async src="files/juelsminde_joust.js"></script>
+    <script>
+        window.addEventListener("keydown", function(e) {
+            if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+        fullscreenButton.addEventListener('click', (ev) => {
+          console.log('Fullscreen button clicked (listener).', ev);
+          // run custom code before requestFullscreen is executed
+          // if you want to prevent default fullscreen call and call manually:
+          // ev.preventDefault();
+          Module.requestFullscreen(true, true);
+        }, {capture: true});
+        canvasElement.addEventListener("webglcontextlost", (e => {
+            alert("WebGL context lost. You will need to reload the page."), e.preventDefault()
+        }), !1);
+        var Module = Module || {};
+        document.addEventListener("DOMContentLoaded", function(){
+            Module.print = console.log;
+            Module.canvas = canvasElement;
+            Module.requestFullscreen = Browser.requestFullscreen;
+            Module.setStatus = e => {
+                if (Module.setStatus.last || (Module.setStatus.last = {
+                        time: Date.now(),
+                        text: ""
+                    }), e !== Module.setStatus.last.text) {
+                    var t = e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/),
+                        s = Date.now();
+                    t && s - Module.setStatus.last.time < 30 || (
+                        Module.setStatus.last.time = s,
+                        Module.setStatus.last.text = e,
+                        t
+                            ? (e = t[1], progressElement.value = 100 * parseInt(t[2]),
+                                progressElement.max = 100 * parseInt(t[4]),
+                                progressElement.hidden = false)
+                            : (progressElement.value = null,
+                                progressElement.max = null,
+                                progressElement.hidden = true),
+                            statusElement.innerHTML = e)
+                }
+            };
+            Module.totalDependencies = 0;
+            Module.monitorRunDependencies = e => {
+                this.totalDependencies = Math.max(this.totalDependencies, e), Module.setStatus(e ? "Preparing... (" + (this.totalDependencies - e) + "/" + this.totalDependencies + ")" : "All downloads complete.")
+            };
+            Module.setStatus("Downloading...");
+            window.onerror = e => {
+                Module.setStatus("Exception thrown, see JavaScript console"), spinnerElement.style.display = "none", Module.setStatus = e => {
+                    e && console.error("[post-exception status] " + e)
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
 </main>
 
     <footer>
