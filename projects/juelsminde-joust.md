@@ -16,4 +16,4 @@ dispElem: >
 
 Here I'm playing with <a href="https://guld-berg.dk">Jørn</a> and <a href="https://zelaven.com">Patrick</a> at the office, and getting my butt kicked. Had it at least been me filming, I would have had an excuse, but it was Jørn holding the camera while playing.
 
-<a href="files/juelsminde_joust.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in the browser</a>
+<a href="/files/projects/juelsminde-joust/juelsminde_joust.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in the browser</a>
