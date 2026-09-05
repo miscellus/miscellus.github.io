@@ -1,14 +1,16 @@
 ---
 title: Projects
 layout: main.njk
+bodyClass: wide
 ---
 
 <p>Here are a couple of projects I am working on when time permits:</p>
 
-{% for proj in collections.project %}
+<div class="project-grid">
+{% for proj in collections.project | reverse %}
     <article class="note">
-        <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
-        <div>
+        <div class="project-content">
+            <h2><a href="{{proj.url}}">{{ proj.data.title }}</a></h2>
             <p><a href="{{proj.data.extUrl}}" target="_blank">{{proj.data.extUrl}}</a></p>
             {{proj.data.dispElem | safe}}
             <p>{{ proj.data.brief }}</p>
@@ -16,5 +18,6 @@ layout: main.njk
         <a class="more-link" href="{{proj.url}}">Read more</a>
     </article>
 {% endfor %}
+</div>
 
 {% include 'getInTouch.njk' %}

@@ -121,8 +121,12 @@ main::after, section::after, header::after, footer::after, nav#main_navigation::
   clear: both;
 }
 
-main.wide, section.wide, header.wide, footer.wide {
-	max-width: 100%;
+body.wide main,
+body.wide section,
+body.wide header,
+body.wide footer,
+body.wide nav#main_navigation {
+	max-width: min(100%, 80rem);
 }
 
 .more-link {
@@ -138,6 +142,67 @@ main.wide, section.wide, header.wide, footer.wide {
     padding: .25rem;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
+}
+
+.play-in-browser-btn {
+	display: inline-block;
+	white-space: nowrap;
+	font-weight: bold;
+	text-decoration: none;
+	font-style: normal;
+	background: #b85600;
+	border-radius: 0.1em;
+	padding: 0.4em 0.6em;
+	font-size: 1.5em;
+	color: white;
+	text-align: center;
+	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.play-in-browser-btn:hover,
+.play-in-browser-btn:focus {
+	background: #984700;
+	color: white;
+}
+
+.play-in-browser-btn:active {
+	background: #7a3900;
+	transform: translateY(2px);
+}
+
+body.dark .play-in-browser-btn {
+	background: #ce670d;
+	color: white;
+}
+
+body.dark .play-in-browser-btn:hover,
+body.dark .play-in-browser-btn:focus {
+	background: #e87b1a;
+}
+
+body.dark .play-in-browser-btn:active {
+	background: #b65a0b;
+}
+
+.project-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+	gap: 1.6rem;
+	margin-bottom: 1.6rem;
+}
+
+.project-grid .note {
+	margin-bottom: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.project-grid .project-content {
+	flex-grow: 1;
+}
+
+.project-grid .more-link {
+	margin-top: 1rem;
 }
 
 body.dark .more-link::after {

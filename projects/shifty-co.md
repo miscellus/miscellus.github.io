@@ -1,5 +1,5 @@
 ---
-title: "Shifty Co"
+title: "Shifty Co."
 extUrl: https://github.com/miscellus/shifty
 
 brief: |
@@ -7,13 +7,13 @@ brief: |
 
 dispElem: >
     <div>
-        <p><a href="/files/projects/shifty-co/shifty-co.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in browser</a></p>
+        <p><a class="play-in-browser-btn" href="/files/projects/shifty-co/shifty-co.html" target="_blank">Play in browser</a></p>
         <img src="/files/projects/shifty-co/splash.png" alt="Screenshot of Shifty Co"></video>
     </div>
 
 ---
 
-Shifty Co is a classic Sokoban-style game. The goal is for the main character to reach an open door, finishing the level and progressing to the next.
+Shifty Co. is a classic Sokoban-style game. The goal is for the main character to reach an open door, finishing the level and progressing to the next.
 
 Easier said than done. The path to the door may be blocked by a hole, for instance. In that case, stones are scattered about that you can push. Push a stone into a hole to fill it and make it traversable.
 
@@ -27,7 +27,7 @@ If you screw up (you noob), you can hit Enter to reset the level back to how it 
 
 Good luck entering the eerie corporate catacombs - *cough* - I mean offices of Shifty Co.
 
-![Example of a Shifty Co Level](/files/projects/shifty-co/level-example.png)
+![Example of a Shifty Co. Level](/files/projects/shifty-co/level-example.png)
 
 ## Thanks
 First of all, thanks to my wife for putting up with my NEC PC-8201A, which smells like an old smoker’s lounge steeped in 40-year-old cigarette smoke.
@@ -40,7 +40,7 @@ Also, thank you to my brother [Jesper Kjær-Galle](https://mangestreger.dk) for 
 
 Of course thanks to [Marinus Oosters](https://github.com/marinuso/asm8085) for his 8085 assembler that I have really enjoyed using and adding features to, as well as the authors of the VirtualT emulator.
 
-## How and Why Shifty Co Exists
+## How and Why Shifty Co. Exists
 I was habitually scrolling Den Blå Avis, a Danish platform for buying and selling used items, where I lucked into buying an NEC PC-8201A from 1983 for just 250 kr. (US $39). I was stoked. I love old computers, and this was now the oldest in my collection, by a good margin. I also love games, so after playing around with the built-in BASIC interpreter on the 8201 for a couple of evenings, I decided to try and download some games for it and transfer them via serial RS-232 using its built-in terminal software TELCOM.
 
 I quickly realized that I wasn't going to find tons of games for the 8201. When the machine was new, I believe it was mostly used as a portable word processor, for instance by journalists who wrote reports on it in the field.

@@ -11,7 +11,7 @@ brief: |
 
 dispElem: >
     <div>
-        <p><a href="/files/projects/juelsminde-joust/juelsminde_joust.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in browser</a></p>
+        <p><a class="play-in-browser-btn" href="/files/projects/juelsminde-joust/juelsminde_joust.html" target="_blank">Play in browser</a></p>
         <video class="project_video" controls="" width="400"><source src="/files/projects/juelsminde_joust_3_player_gameplay.mp4#t=0.001" type="video/mp4"></video>
     </div>
 
