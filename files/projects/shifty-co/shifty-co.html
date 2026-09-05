@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shifty Co. | miscellus.com</title>
+<style>
+        :root {
+            /* Unified Grayscale (Dark Theme Base) */
+        --gray-100: #181816; /* Darkest - App Background */
+        --gray-200: #232321; /* Panels & Surfaces */
+        --gray-300: #2f2f2c; /* Slightly raised panels (Gutters) */
+        --gray-400: #464642; /* Buttons Normal */
+        --gray-500: #5d5d58; /* Borders & Buttons Hover */
+        --gray-600: #8b8b86; /* Lighter Borders */
+        --gray-700: #b4b4b0; /* Muted Text */
+        --gray-800: #d6d6d3; /* Secondary Text (Hints, Labels) */
+        --gray-900: #f2f2f0; /* Primary Text (Bright) */
+
+        /* Retro CRT Accents */
+        --accent-red: #ff5555;
+        --accent-green: #50fa7b;
+        --accent-green-glow: rgba(80, 250, 123, 0.3);
+
+            /* === 2. SEMANTIC MAPPING === */
+
+            /* --- LCD Screen --- */
+            --lcd-bg: rgb(168, 172, 164);
+            --lcd-pixel: rgb(41, 42, 40);
+            --lcd-shadow: rgb(129, 130, 124);
+
+            /* --- Base App Theme --- */
+            --app-bg: var(--gray-100);
+            --panel-bg: var(--gray-200);
+            --border-color: var(--gray-500);
+            --text-muted: var(--gray-700);
+
+            /* --- Buttons --- */
+            --btn-bg: var(--gray-400);
+            --btn-bg-hover: var(--gray-500);
+            --btn-text: var(--gray-900);
+            --btn-border: var(--gray-600);
+            --btn-hint-text: var(--gray-800);
+
+            /* --- Source Code Viewer --- */
+            --code-text: var(--gray-900);
+            --code-bg-hover: var(--gray-300);
+            --code-bg-active: var(--gray-400);
+            --code-border-active: var(--gray-700);
+            --gutter-bg: var(--gray-300);
+            --gutter-text: var(--gray-700);
+            --breakpoint-bg: var(--accent-red);
+            --breakpoint-text: #ffffff;
+
+            /* --- CPU Debugger --- */
+            --cpu-bg: rgba(18, 18, 18, 0.95); /* Using an rgba version of gray-100 */
+            --cpu-label: var(--gray-600);
+            --cpu-val: var(--gray-900);
+            --cpu-flag-inactive: var(--gray-600);
+            --cpu-flag-active: var(--accent-green);
+            --cpu-flag-glow: var(--accent-green-glow);
+
+            /* --- Touch Controls --- */
+            --touch-bg: rgba(255, 255, 255, 0.2);
+            --touch-border: rgba(255, 255, 255, 0.4);
+            --touch-text: var(--gray-900);
+            --touch-bg-active: var(--gray-100);
+            --touch-border-active: var(--gray-300);
+            --touch-text-active: var(--gray-600);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                /* Inverted Grayscale (Light Theme Base) */
+                --gray-900: #181816; /* Lightest - App Background */
+                --gray-800: #232321; /* Panels & Surfaces */
+                --gray-700: #2f2f2c; /* Gutters / Hover states */
+                --gray-600: #464642; /* Buttons Normal */
+                --gray-500: #5d5d58; /* Borders */
+                --gray-400: #8b8b86; /* Lighter Borders */
+                --gray-300: #b4b4b0; /* Muted Text */
+                --gray-200: #d6d6d3; /* Secondary Text */
+                --gray-100: #f2f2f0; /* Darkest - Primary Text */
+
+                /* We also need to update the rgba values that used hardcoded rgb */
+                --cpu-bg: rgba(244, 245, 245, 0.95);
+                --touch-bg-active: rgba(244, 245, 245, 0.4);
+
+                /* Optional: Tweak accents so they don't burn eyes on a white background */
+                --accent-green: #059669;
+                --accent-green-glow: rgba(5, 150, 105, 0.4);
+            }
+        }
+
+        *, *:before, *:after { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            background: var(--app-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            gap: 12px;
+            font-family: sans-serif;
+        }
+
+        /* --- Shared Typography --- */
+        .source-viewer, .cpu-debugger, .memory-viewer {
+            font-family: monospace;
+        }
+
+        .source-viewer #file-selector {
+            color: var(--btn-text);
+        }
+
+        /* --- Shared Button Styles --- */
+        .debug-controls button, #btn-toggle-debug {
+            padding: 6px 12px;
+            cursor: pointer;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--btn-border);
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .debug-controls button:hover, #btn-toggle-debug:hover {
+            background: var(--btn-bg-hover);
+        }
+
+        /* --- Layout Architecture --- */
+        .top-panel {
+            flex: 0 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        #debugger-container {
+            flex: 1 1 auto;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 12px;
+            min-height: 0;
+        }
+
+        .left-pane, .right-pane {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .left-pane { gap: 8px; }
+        .right-pane { gap: 12px; }
+
+        /* --- Components --- */
+        canvas {
+            border-radius: 6px;
+            border: solid 8px var(--lcd-bg);
+            aspect-ratio: 240 / 64;
+            width: 100%;
+        }
+
+        .debug-controls {
+            flex: 0 0 auto;
+            background: var(--panel-bg);
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .debug-controls button { margin-right: 5px; }
+
+        .debug-controls button::after {
+            content: attr(data-key);
+            color: var(--btn-hint-text);
+            font-weight: normal;
+            padding-left: 0.5em;
+        }
+
+        .source-viewer {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            background: var(--panel-bg);
+            color: var(--code-text);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        /* --- Source Code Lines --- */
+        .source-line {
+            display: flex;
+            align-items: stretch;
+            cursor: pointer;
+            white-space: pre;
+            line-height: 1.5;
+        }
+
+        .source-line:hover { background: var(--code-bg-hover); }
+
+        .source-line.active {
+            background: var(--code-bg-active);
+            outline: 1px solid var(--code-border-active);
+        }
+
+        .gutter {
+            flex: 0 0 40px;
+            background: var(--gutter-bg);
+            color: var(--gutter-text);
+            text-align: right;
+            padding: 0 8px;
+            margin-right: 12px;
+            user-select: none;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .gutter.breakpoint {
+            background: var(--breakpoint-bg);
+            color: var(--breakpoint-text);
+        }
+
+        .code-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        #file-selector {
+            padding: 6px;
+            background: var(--gutter-bg);
+            color: var(--breakpoint-text);
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            outline: none;
+        }
+
+        .source-code {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* --- CPU Debugger --- */
+        .cpu-debugger {
+            flex: 0 0 auto;
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            user-select: none;
+        }
+
+        .cpu-debugger hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 4px 0;
+            width: 100%;
+        }
+
+        .cpu-section {
+            display: grid;
+            column-gap: 12px;
+            row-gap: 6px;
+            align-items: center;
+        }
+
+        .cpu-section.top-regs { grid-template-columns: repeat(2, auto 1fr); }
+        .cpu-section.registers { grid-template-columns: repeat(4, auto 1fr); }
+        .cpu-section.pairs { grid-template-columns: repeat(3, auto 1fr); }
+        .cpu-section.flags { grid-template-columns: repeat(3, auto 1fr); }
+
+        .cpu-label {
+            color: var(--cpu-label);
+            text-align: right;
+        }
+
+        .cpu-val { color: var(--cpu-val); }
+        .cpu-val.flag { color: var(--cpu-flag-inactive); }
+        .cpu-val.flag.active {
+            color: var(--cpu-flag-active);
+            text-shadow: 0 0 4px var(--cpu-flag-glow);
+        }
+
+        /* --- Memory Viewer Placeholder --- */
+        .memory-viewer {
+            flex: 1 1 auto;
+            background: var(--app-bg);
+            border: 1px dashed var(--btn-border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            min-height: 150px;
+        }
+
+        /* --- Touch Controls --- */
+        .touch-controls {
+            display: none;
+            grid-template-areas:
+                ". up ."
+                "left . right"
+                ". down .";
+            grid-template-columns: repeat(3, clamp(60px, 16vw, 85px));
+            grid-template-rows: repeat(3, clamp(60px, 16vw, 85px));
+            gap: 4px;
+            user-select: none;
+            -webkit-user-select: none;
+            opacity: 0.4;
+        }
+
+        .touch-controls-left {
+            display: none;
+            user-select: none;
+            -webkit-user-select: none;
+            opacity: 0.4;
+        }
+
+        .touch-btn {
+            background: var(--touch-bg);
+            border: 2px solid var(--touch-border);
+            border-radius: 50%;
+            color: var(--touch-text);
+            font-size: 2em;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+
+        .touch-btn:active {
+            background: var(--touch-bg-active);
+            border-color: var(--touch-border-active);
+            color: var(--touch-text-active);
+            transform: translateY(2px);
+        }
+
+        .touch-btn.up { grid-area: up; }
+        .touch-btn.left { grid-area: left; }
+        .touch-btn.right { grid-area: right; }
+        .touch-btn.down { grid-area: down; }
+
+        .touch-btn.enter {
+            width: clamp(60px, 16vw, 85px);
+            height: clamp(60px, 16vw, 85px);
+            font-size: 1.5em;
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- Max Viewport Canvas Mode --- */
+        #btn-toggle-debug {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            transition: background 0.2s;
+        }
+
+        #btn-toggle-debug::before { content: "hide debugger"; }
+
+        body.debugger-hidden #btn-toggle-debug::before { content: "debugger"; }
+
+        body.debugger-hidden #debugger-container { display: none !important; }
+
+        body.debugger-hidden .top-panel {
+            flex: 1 1 auto;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            #debugger-container { grid-template-columns: 1fr; }
+            .right-pane { flex-direction: row; }
+        }
+
+        @media (pointer: coarse), (max-width: 1024px) {
+            .touch-controls {
+                display: grid;
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                z-index: 100;
+            }
+
+            .touch-controls-left {
+                display: flex;
+                position: fixed;
+                bottom: 24px;
+                left: 24px;
+                z-index: 100;
+                /* Match the height/alignment of the right-side grid */
+                align-items: flex-end;
+                padding-bottom: clamp(60px, 16vw, 85px);
+            }
+        }
+    </style>
+</head>
+<body class="debugger-hidden">
+
+    <div class="top-panel">
+        <canvas id="canvas"></canvas>
+        <span id="btn-toggle-debug"></span>
+    </div>
+
+    <div class="workspace" id="debugger-container">
+
+        <div class="left-pane">
+            <div class="debug-controls">
+                <button id="btn-run-pause" data-key="F7">Pause</button>
+                <button id="btn-step-into" data-key="F11">Step Into</button>
+                <button id="btn-step-over" data-key="F10">Step Over</button>
+                <button id="btn-step-out" data-key="Shift+F11">Step Out</button>
+            </div>
+
+            <div class="source-viewer">
+                <select id="file-selector"></select>
+                <div id="source-code" class="source-code"></div>
+            </div>
+        </div>
+
+        <div class="right-pane">
+
+            <div id="cpu-debugger" class="cpu-debugger">
+                <div class="cpu-section top-regs">
+                    <div class="cpu-label">PC</div><div class="cpu-val" id="cpu-pc">0000</div>
+                    <div class="cpu-label">SP</div><div class="cpu-val" id="cpu-sp">0000</div>
+                </div>
+                <hr>
+                <div class="cpu-section registers">
+                    <div class="cpu-label">A</div><div class="cpu-val" id="cpu-a">00</div>
+                    <div class="cpu-label">B</div><div class="cpu-val" id="cpu-b">00</div>
+                    <div class="cpu-label">C</div><div class="cpu-val" id="cpu-c">00</div>
+                    <div class="cpu-label">D</div><div class="cpu-val" id="cpu-d">00</div>
+                    <div class="cpu-label">E</div><div class="cpu-val" id="cpu-e">00</div>
+                    <div class="cpu-label">H</div><div class="cpu-val" id="cpu-h">00</div>
+                    <div class="cpu-label">L</div><div class="cpu-val" id="cpu-l">00</div>
+                </div>
+                <hr>
+                <div class="cpu-section pairs">
+                    <div class="cpu-label">BC</div><div class="cpu-val" id="cpu-bc">0000</div>
+                    <div class="cpu-label">DE</div><div class="cpu-val" id="cpu-de">0000</div>
+                    <div class="cpu-label">HL</div><div class="cpu-val" id="cpu-hl">0000</div>
+                </div>
+                <hr>
+                <div class="cpu-section flags">
+                    <div class="cpu-label">S</div><div class="cpu-val flag" id="cpu-s">0</div>
+                    <div class="cpu-label">Z</div><div class="cpu-val flag" id="cpu-z">0</div>
+                    <div class="cpu-label">AC</div><div class="cpu-val flag" id="cpu-ac">0</div>
+                    <div class="cpu-label">P</div><div class="cpu-val flag" id="cpu-p">0</div>
+                    <div class="cpu-label">CY</div><div class="cpu-val flag" id="cpu-cy">0</div>
+                </div>
+            </div>
+
+            <div id="memory-viewer" class="memory-viewer">
+                [ Memory View Placeholder ]
+            </div>
+
+        </div>
+    </div>
+
+    <div class="touch-controls-left">
+        <button class="touch-btn enter" data-row="6" data-col="7">↻</button>
+    </div>
+
+    <div class="touch-controls">
+        <button class="touch-btn up" data-row="6" data-col="1">↑</button>
+        <button class="touch-btn left" data-row="6" data-col="3">←</button>
+        <button class="touch-btn right" data-row="6" data-col="4">→</button>
+        <button class="touch-btn down" data-row="6" data-col="2">↓</button>
+    </div>
+
+    <script src="shifty-co.js"></script>
+</body>
+</html>

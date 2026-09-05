@@ -11,6 +11,9 @@ export default async function(eleventyConfig) {
     eleventyConfig.addWatchTarget("_includes");
     eleventyConfig.addWatchTarget("_data");
 
+    eleventyConfig.ignores.add("___shifty");
+    eleventyConfig.addPassthroughCopy("___shifty");
+
     eleventyConfig.addPlugin(syntaxHighlight, {
         init: function({ Prism }) {
             Prism.languages.gbasm = {
