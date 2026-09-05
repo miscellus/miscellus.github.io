@@ -1,0 +1,170 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="color-scheme" content="dark light">
+    <title>Shifty Co | miscellus</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />   
+
+    <!-- mobile icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+    <link rel="manifest" href="/files/site.webmanifest">
+    <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+    <div id="theme_button_wrapper"><span id="theme_button"></span></div>
+<script>
+"use strict";
+(function(){
+	let theme = parseInt(sessionStorage.getItem('theme')) || 0;
+	let next_theme;
+	let system_preference = false;
+	
+	function update_theme() {
+		const cl = document.body.classList;
+
+		const theme_is_dark = [system_preference, false, true][theme];
+
+		
+		if (theme_is_dark) {
+			cl.add('dark');
+		}
+		else {
+			cl.remove('dark');
+		}
+
+		if (theme == 0) {
+			cl.add('system');
+		}
+		else {
+			cl.remove('system');
+		}
+	}
+
+	if (window.matchMedia) {
+		next_theme = function (t) { return (t + 1) % 3; };
+		
+		const media_match_prefer_dark = window.matchMedia('(prefers-color-scheme: dark)');
+
+		function media_match_on_change(media) {
+			system_preference = media.matches;
+			update_theme();
+		}
+
+		media_match_on_change(media_match_prefer_dark);
+		if (media_match_prefer_dark.addListener) {
+			media_match_prefer_dark.addListener(media_match_on_change);
+		}
+		else {
+			media_match_prefer_dark.addEventListener("change", media_match_on_change);	
+		}
+	}
+	else {
+		next_theme = function(t) { return 1 + ((t + 1) & 1); };
+		theme = 1;
+		update_theme();
+	}
+
+	document.getElementById("theme_button").addEventListener("click", function(e) {
+		theme = next_theme(theme);
+		sessionStorage.setItem('theme', theme);
+		update_theme();
+	});
+})();
+</script>
+
+    <nav id="main_navigation">
+	<a id="miscellus_logo" href="/">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 58.54"><path transform="translate(-73.08 -47.94)" d="M93.79 75.12h22.58v3.53H93.79 M111.25 57.15q2.53 0 3.81 1.31 1.3 1.28 1.3 4.14v9.7h-4.05v-8.7q0-3.2-2.23-3.2-1.61 0-2.3 1.14-.67 1.14-.67 3.3v7.46h-4.06v-8.7q0-3.2-2.23-3.2-1.7 0-2.35 1.28-.62 1.25-.62 3.62v7h-4.06V57.43h3.1l.55 1.9h.22q.68-1.14 1.85-1.66 1.2-.52 2.48-.52 1.63 0 2.75.55 1.14.52 1.77 1.63h.35q.68-1.14 1.88-1.66 1.23-.52 2.5-.52 M82.12 98.49q1.32 0 1.98.67.68.67.68 2.15v5.02h-2.1v-4.5q0-1.66-1.16-1.66-.84 0-1.19.59-.35.6-.35 1.7v3.87h-2.1v-4.5q0-1.66-1.16-1.66-.88 0-1.22.66-.32.65-.32 1.88v3.62h-2.1v-7.7h1.6l.29.99h.11q.35-.6.96-.86.62-.27 1.29-.27.84 0 1.42.28.6.27.92.85h.18q.35-.6.98-.86.63-.27 1.3-.27M88 95.6q.47 0 .8.23.34.22.34.8 0 .59-.34.81-.33.23-.8.23-.48 0-.82-.23-.32-.22-.32-.8 0-.6.32-.8.34-.23.82-.23m1.04 3.03v7.7h-2.1v-7.7M96.62 104.05q0 1.17-.84 1.8-.81.62-2.45.62-.8 0-1.38-.1-.58-.1-1.16-.35v-1.73q.62.28 1.34.46.72.19 1.27.19.6 0 .87-.19.27-.18.27-.48 0-.2-.11-.35-.1-.16-.45-.35-.35-.2-1.1-.51-.74-.31-1.2-.6-.45-.32-.68-.74-.22-.44-.22-1.09 0-1.07.83-1.6.83-.54 2.21-.54.72 0 1.37.14.65.14 1.34.46l-.63 1.51q-.57-.24-1.07-.4-.51-.16-1.03-.16-.94 0-.94.5 0 .2.12.35.12.14.46.3.36.18 1.03.46.67.27 1.15.56.48.28.73.72.27.44.27 1.12M101.37 106.47q-1.72 0-2.66-.94-.93-.95-.93-3 0-1.42.48-2.3.48-.9 1.32-1.32.86-.42 1.98-.42.79 0 1.37.15.59.16 1.03.37l-.62 1.62q-.5-.2-.94-.32-.42-.13-.84-.13-1.64 0-1.64 2.33 0 1.16.42 1.7.44.56 1.22.56.66 0 1.17-.17.5-.19.99-.5v1.8q-.48.3-1.02.43-.52.14-1.33.14M108.67 98.49q1.59 0 2.52.91.93.9.93 2.59V103h-4.96q.02.9.52 1.4.5.5 1.4.5.73 0 1.34-.13.62-.16 1.27-.47v1.62q-.58.29-1.2.41-.63.14-1.51.14-1.16 0-2.05-.42-.89-.44-1.4-1.3-.5-.87-.5-2.21 0-1.34.45-2.25.46-.9 1.28-1.35.82-.45 1.9-.45m0 1.5q-.61 0-1 .39-.4.4-.47 1.23h2.95q-.02-.7-.38-1.16-.36-.47-1.1-.47M115.94 106.33h-2.1V95.61h2.1M120.24 106.33h-2.1V95.61h2.1M129.51 98.63v7.7h-1.6l-.29-.98h-.11q-.37.59-1.02.86-.63.26-1.35.26-1.25 0-2-.66-.74-.68-.74-2.16v-5.02h2.1v4.5q0 .83.3 1.26.3.4.94.4.96 0 1.32-.64.35-.67.35-1.9v-3.62M137.08 104.05q0 1.17-.83 1.8-.82.62-2.46.62-.8 0-1.38-.1-.58-.1-1.16-.35v-1.73q.62.28 1.34.46.72.19 1.27.19.6 0 .88-.19.26-.18.26-.48 0-.2-.11-.35-.1-.16-.45-.35-.35-.2-1.1-.51-.74-.31-1.2-.6-.45-.32-.68-.74-.22-.44-.22-1.09 0-1.07.83-1.6.83-.54 2.21-.54.72 0 1.37.14.65.14 1.34.46l-.63 1.51q-.57-.24-1.07-.4-.51-.16-1.03-.16-.94 0-.94.5 0 .2.12.35.12.14.46.3.36.18 1.03.46.67.27 1.15.56.48.28.73.72.27.44.27 1.12 M 105.078,47.938 c -11.015,0 -19.965,8.948 -19.965,19.963 0,11.015 8.95,19.965 19.965,19.965 11.015,0 19.963,-8.95 19.963,-19.965 0,-11.015 -8.948,-19.963 -19.963,-19.963 m 0,1.764 c 10.062,0 18.199,8.137 18.199,18.199 0,10.062 -8.137,18.201 -18.199,18.201 -10.062,0 -18.199,-8.139 -18.199,-18.201 0,-10.062 8.137,-18.199 18.199,-18.199z"></path></svg>
+		</a>
+	<a href="/projects">Projects</a>
+	<a href="/teaching">Teaching</a>
+</nav>
+
+    
+<main>
+    <header>
+        <h1>Shifty Co</h1>
+        <date><small>Updated: 9/5/2026</small></date>
+    </header>
+
+    
+<p><a href="https://github.com/miscellus/shifty" target="_blank">https://github.com/miscellus/shifty</a>.</p>
+
+<div>
+    <p><a href="/files/projects/shifty-co/shifty-co.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in browser</a></p>
+    <img src="/files/projects/shifty-co/splash.png" alt="Screenshot of Shifty Co"></video>
+</div>
+
+
+<p>A Sokoban-style game written in 8085 assembly language for the NEC PC-8201A (and Tandy TRS-80 Model 100, Olivetti M10, and the Kyotronic KC-85).
+</p>
+
+<p>Shifty Co is a classic Sokoban-style game. The goal is for the main character to reach an open door, finishing the level and progressing to the next.</p>
+<p>Easier said than done. The path to the door may be blocked by a hole, for instance. In that case, stones are scattered about that you can push. Push a stone into a hole to fill it and make it traversable.</p>
+<p>But the door could be locked. In that case, look for shooting targets. The doors in the level magically decide to unlock and open if you destroy all such shooting targets (what a weird place.)</p>
+<p>Sometimes the path to the door goes through a narrow passage with turns and bends that you need to push a stone (or something else) through. For that, we have the arrow tiles.</p>
+<p>Arrow tiles can be pushed like the stones, but something special happens when they are pushed all the way up against a wall. If you try to push into an arrow that is pointing sideways compared to your direction of movement, you teleport to the front of where the arrow is pointing. Very exciting! And what happens if you push a stone into the perpendicular arrow? It teleports too! What about pushing an arrow into an arrow, surely not? YES! Can I push a whole train of stones, arrows, and shooting targets into an arrow? I think you know the answer.</p>
+<p>If you screw up (you noob), you can hit Enter to reset the level back to how it started. Too harsh for you? Hit Backspace or Z to undo a single move. You have an undocumented number of moves that can be undone like that.</p>
+<p>Good luck entering the eerie corporate catacombs - <em>cough</em> - I mean offices of Shifty Co.</p>
+<p><img src="/files/projects/shifty-co/level-example.png" alt="Example of a Shifty Co Level"></p>
+<h2>Thanks</h2>
+<p>First of all, thanks to my wife for putting up with my NEC PC-8201A, which smells like an old smoker’s lounge steeped in 40-year-old cigarette smoke.</p>
+<p>I want to thank <a href="https://eydi.newgrounds.com">Eydi av Hamri</a> for helping me with the visuals of the game, and generally always being a pleasure to hang out and make games with.</p>
+<p>Thank you <a href="https://www.atbrask.dk/">Asbjørn Tølbøl Brask</a> for <strong>porting this game to Commodore 64!</strong> And for consistently nerd-sniping me into crazier and crazier things while listening to me ramble about this game during our lunch breaks at work.</p>
+<p>Also, thank you to my brother <a href="https://mangestreger.dk">Jesper Kjær-Galle</a> for being the first (I believe) to finish the entire game on the real hardware and giving me important feedback.</p>
+<p>Of course thanks to <a href="https://github.com/marinuso/asm8085">Marinus Oosters</a> for his 8085 assembler that I have really enjoyed using and adding features to, as well as the authors of the VirtualT emulator.</p>
+<h2>How and Why Shifty Co Exists</h2>
+<p>I was habitually scrolling Den Blå Avis, a Danish platform for buying and selling used items, where I lucked into buying an NEC PC-8201A from 1983 for just 250 kr. (US $39). I was stoked. I love old computers, and this was now the oldest in my collection, by a good margin. I also love games, so after playing around with the built-in BASIC interpreter on the 8201 for a couple of evenings, I decided to try and download some games for it and transfer them via serial RS-232 using its built-in terminal software TELCOM.</p>
+<p>I quickly realized that I wasn't going to find tons of games for the 8201. When the machine was new, I believe it was mostly used as a portable word processor, for instance by journalists who wrote reports on it in the field.</p>
+<p>There were some games that I could find, e.g., <a href="https://www.web8201.net/Files/LIBRARY_web8201/Games/GOLF.BA">this golf game written in BASIC</a>. Actually, the only games I could find for it were written in BASIC.</p>
+<p>So I impulsively decided that I was going to write a machine language game for it, combining my fondness for both games and assembly programming.</p>
+<p>As you might imagine, this took me on a bit of a journey. I have previously written (part of) <a href="https://www.miscellus.com/projects/gameboy-game/">a game for the Nintendo Game Boy</a>. But the homebrew scene for Game Boy games is a lot more established / existing than for the NEC PC-8201A. I had to build tools to aid development.</p>
+<h3>Hurdle No. 1</h3>
+<p>The built-in terminal software on the 8201, TELCOM, can only receive printable ASCII, so no machine code transfer! I therefore wrote (asked an LLM to write) a Python script that would convert the machine code to a BASIC program that would poke the raw machine code into memory at the correct place and jump to it. It worked, but man it was slow to iterate like that:</p>
+<pre class="language-BASIC"><code class="language-BASIC">10 Work on the game code;
+20 assemble the game;
+30 run the binary through the Python script;
+40 open a serial terminal on my modern PC;
+50 set the baud rate, parity, stop bits, and flow-control;
+60 then open the TELCOM program on the 8201;
+70 then set its baud rate, parity, stop bits, and flow-control;
+80 finally tranfer;
+90 exit TELCOM;
+100 enter BASIC;
+110 load the game loader BASIC script;
+120 crash the 8201 because my game code was buggy;
+130 goto 10.</code></pre>
+<p>So I figured I would mostly test on the venerable <a href="https://sourceforge.net/projects/virtualt/">VirtualT emulator</a> that emulates the entire KC-85 family of computers, including the NEC PC-8201A.</p>
+<h3>Hurdle No. 2</h3>
+<p>VirtualT allowed for much faster code iteration. I could do just lines <code>10</code> and <code>20</code> from above, and then drag and drop the output onto the VirtualT emulator. That would produce the GAME.CO file that I could then run. But this was still too slow for my liking as I would have to completely reset the emulator every time (either a bug in VirtualT or me just being dumb).</p>
+<p>So I decided to side-quest and write my own NEC PC-8201A emulator. Since the emulator was not the main thing I was trying to achieve, I did use an LLM to speed up some of the busywork of implementing every single 8085 instruction in the emulator. But I would not call it vibe coding, because I had a lot of opinions about the output and also a lot of manual work on the emulator, I mostly used LLMs to quickly get off the ground and avoid the blank-canvas effect.</p>
+<p>The writing of the emulator coincided with my friend Asbjørn nerd-sniping me into porting the game to the web so it could be played in the browser and even on a smartphone with touch controls... Thanks Asbjørn!
+Because of this, I decided to write the emulator as a standalone C99 library that could be compiled directly to WebAssembly. Because the emulator doesn't depend on anything (not even the C standard library), I could ditch Emscripten and just use Clang.</p>
+<p>I again turned to an LLM to make the HTML/CSS/JavaScript frontend that would hook up to the WASM emulator core. Web stuff generally doesn't appeal to me, so I was okay outsourcing most of this part to the LLM. I was actually impressed with the LCD screen shader. Sorry to whoever wrote the original thing on <a href="https://www.shadertoy.com/">ShaderToy</a> that the LLM likely trained on, and that I can therefore not give credit to directly...</p>
+<h3>Hurdle No. 3</h3>
+<p>As the game grew in complexity, it got harder to debug. I was just reading the code carefully, and prompting myself not to make any mistakes! But alas, bugs crept in, especially when working on the game's push mechanic.</p>
+<p>So the next side-quest was adding a debugger to the emulator. It was actually surprisingly easy to do. It required a little more bookkeeping in the emulator (keeping track of the call stack), but besides that, the main thing was augmenting the assembler with a feature to output debug information in a web-friendly format (JSON). The assembler I use is the very awesome <a href="https://github.com/marinuso/asm8085"><strong>asm8085</strong> by Marinus Oosters</a>, which was written with the KC-85 family of computers in mind. I have already made a few tweaks, which were super easy thanks to the well-written code by Marinus!</p>
+<p>Now I have a source level debugger with creature comforts such as:</p>
+<ul>
+<li>Breakpoints</li>
+<li>Step into</li>
+<li>Step over</li>
+<li>Step out</li>
+</ul>
+<p><img src="/files/projects/shifty-co/debugger.png" alt="Screenshot of debugger"></p>
+
+
+</main>
+
+    <footer>
+    <p>Copyright © 2026, Jakob Kjær-Kammersgaard</p>
+</footer>
+
+</body>
+</html>
