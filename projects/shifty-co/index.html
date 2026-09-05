@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta name="color-scheme" content="dark light">
-    <title>Shifty Co | miscellus</title>
+    <title>Shifty Co. | miscellus</title>
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />   
 
@@ -16,7 +16,7 @@
     <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
 </head>
-<body>
+<body >
     <div id="theme_button_wrapper"><span id="theme_button"></span></div>
 <script>
 "use strict";
@@ -89,7 +89,7 @@
     
 <main>
     <header>
-        <h1>Shifty Co</h1>
+        <h1>Shifty Co.</h1>
         <date><small>Updated: 9/5/2026</small></date>
     </header>
 
@@ -97,7 +97,7 @@
 <p><a href="https://github.com/miscellus/shifty" target="_blank">https://github.com/miscellus/shifty</a>.</p>
 
 <div>
-    <p><a href="/files/projects/shifty-co/shifty-co.html" target="_blank" style="font-size: 2em; font-weight: bold;">Play in browser</a></p>
+    <p><a class="play-in-browser-btn" href="/files/projects/shifty-co/shifty-co.html" target="_blank">Play in browser</a></p>
     <img src="/files/projects/shifty-co/splash.png" alt="Screenshot of Shifty Co"></video>
 </div>
 
@@ -105,21 +105,21 @@
 <p>A Sokoban-style game written in 8085 assembly language for the NEC PC-8201A (and Tandy TRS-80 Model 100, Olivetti M10, and the Kyotronic KC-85).
 </p>
 
-<p>Shifty Co is a classic Sokoban-style game. The goal is for the main character to reach an open door, finishing the level and progressing to the next.</p>
+<p>Shifty Co. is a classic Sokoban-style game. The goal is for the main character to reach an open door, finishing the level and progressing to the next.</p>
 <p>Easier said than done. The path to the door may be blocked by a hole, for instance. In that case, stones are scattered about that you can push. Push a stone into a hole to fill it and make it traversable.</p>
 <p>But the door could be locked. In that case, look for shooting targets. The doors in the level magically decide to unlock and open if you destroy all such shooting targets (what a weird place.)</p>
 <p>Sometimes the path to the door goes through a narrow passage with turns and bends that you need to push a stone (or something else) through. For that, we have the arrow tiles.</p>
 <p>Arrow tiles can be pushed like the stones, but something special happens when they are pushed all the way up against a wall. If you try to push into an arrow that is pointing sideways compared to your direction of movement, you teleport to the front of where the arrow is pointing. Very exciting! And what happens if you push a stone into the perpendicular arrow? It teleports too! What about pushing an arrow into an arrow, surely not? YES! Can I push a whole train of stones, arrows, and shooting targets into an arrow? I think you know the answer.</p>
 <p>If you screw up (you noob), you can hit Enter to reset the level back to how it started. Too harsh for you? Hit Backspace or Z to undo a single move. You have an undocumented number of moves that can be undone like that.</p>
 <p>Good luck entering the eerie corporate catacombs - <em>cough</em> - I mean offices of Shifty Co.</p>
-<p><img src="/files/projects/shifty-co/level-example.png" alt="Example of a Shifty Co Level"></p>
+<p><img src="/files/projects/shifty-co/level-example.png" alt="Example of a Shifty Co. Level"></p>
 <h2>Thanks</h2>
 <p>First of all, thanks to my wife for putting up with my NEC PC-8201A, which smells like an old smoker’s lounge steeped in 40-year-old cigarette smoke.</p>
 <p>I want to thank <a href="https://eydi.newgrounds.com">Eydi av Hamri</a> for helping me with the visuals of the game, and generally always being a pleasure to hang out and make games with.</p>
 <p>Thank you <a href="https://www.atbrask.dk/">Asbjørn Tølbøl Brask</a> for <strong>porting this game to Commodore 64!</strong> And for consistently nerd-sniping me into crazier and crazier things while listening to me ramble about this game during our lunch breaks at work.</p>
 <p>Also, thank you to my brother <a href="https://mangestreger.dk">Jesper Kjær-Galle</a> for being the first (I believe) to finish the entire game on the real hardware and giving me important feedback.</p>
 <p>Of course thanks to <a href="https://github.com/marinuso/asm8085">Marinus Oosters</a> for his 8085 assembler that I have really enjoyed using and adding features to, as well as the authors of the VirtualT emulator.</p>
-<h2>How and Why Shifty Co Exists</h2>
+<h2>How and Why Shifty Co. Exists</h2>
 <p>I was habitually scrolling Den Blå Avis, a Danish platform for buying and selling used items, where I lucked into buying an NEC PC-8201A from 1983 for just 250 kr. (US $39). I was stoked. I love old computers, and this was now the oldest in my collection, by a good margin. I also love games, so after playing around with the built-in BASIC interpreter on the 8201 for a couple of evenings, I decided to try and download some games for it and transfer them via serial RS-232 using its built-in terminal software TELCOM.</p>
 <p>I quickly realized that I wasn't going to find tons of games for the 8201. When the machine was new, I believe it was mostly used as a portable word processor, for instance by journalists who wrote reports on it in the field.</p>
 <p>There were some games that I could find, e.g., <a href="https://www.web8201.net/Files/LIBRARY_web8201/Games/GOLF.BA">this golf game written in BASIC</a>. Actually, the only games I could find for it were written in BASIC.</p>
