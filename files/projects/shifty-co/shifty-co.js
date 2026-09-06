@@ -172,7 +172,7 @@
             this.updateShaderColors(true); // Initial color cache population
 
             try {
-                const { instance } = await WebAssembly.instantiateStreaming(await fetch('shifty-co.wasm'));
+                const { instance } = await WebAssembly.instantiateStreaming(await fetch('web_shifty.wasm'));
                 this.vm = instance.exports;
 
                 const gameBytes = new Uint8Array(await this.fetchBytes('shifty.co'));
